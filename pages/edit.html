@@ -25,10 +25,10 @@
       <input class="form-control" type="text" ng-model="customer.Status" value="{{customer.Status}}" required />
     </div>
 
-    <button class="btn btn-primary" ng-disabled="AddNewForm.$invalid || isUnchanged(customer)" id="add-new-btn" ng-click="Update_Customer(customer)">Uaktualnij
+    <button class="btn btn-primary" ng-disabled="AddNewForm.$invalid || isUnchanged(customer)" id="add-new-btn" ng-click="Update_Customer(customer)">Update
     <span class="glyphicon glyphicon-floppy-disk"></span></button>
-    <button class="btn btn-danger" ng-click="Delete_Customer(customer)">Skasuj <span class="glyphicon glyphicon-trash"></span></button>
-    <a href="#/" class="btn btn-danger">Anuluj</a>
+    <button class="btn btn-danger" ng-click="Delete_Customer(customer)">Delete <span class="glyphicon glyphicon-trash"></span></button>
+    <a href="#/" class="btn btn-danger">Cancel</a>
 
   </form>
 

@@ -52,5 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['customeredit/(:num)'] = 'customeredit/index/$1';
 $route['customerupdate/(:num)'] = 'customerupdate/index/$1';
+$route['customerdelete/(:num)'] = 'customerdelete/index/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -73,7 +73,7 @@ app.controller('CustomerEditControler',[
           //console.log(customer);
           //var deleteCustomer = confirm('Are you absolutely sure you want to delete?');
           //if (deleteCustomer) {
-              $http.delete('api/Customers/'+customer.id);
+              $http.delete('api/index.php/customerdelete/'+customer.id);
               $scope.activePath = $location.path('/');
           //}        
       };

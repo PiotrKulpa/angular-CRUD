@@ -98,20 +98,30 @@ class Crud_model extends CI_Model {
 				'Email' => $Email,
 				'Status' => $Status
 				);
-				$this->db->where('id', $id);
-				$this->db->replace('customers', $data);
 				
-				if ($updatequery) {
-						
-						
-						return true;
-						
-					} else {
-						
-						
-						return false;
-					}
+				$this->db->where('id', $id);
+				$this->db->update('customers', $data);
+				
+				
 			}
+		}
+		
+		public function deleteModel($id)
+		{
+			try
+			{
+				$this->db->delete('customers', array('id' => $id));
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				echo '{"error":{"text":'. $e->errorMessage() .'}}';
+			}
+			
+			
+				
+			
+			
+			
 		}
 
 }
