@@ -17,7 +17,7 @@ app.config(['$routeProvider', function($routeProvider) {
 app.controller ('CustomerListControler',[
   '$scope','$http',
   function ($scope, $http) {
-      $http.get('api/index.php/Customerlist').success(function(data) {
+      $http.get('api/index.php/customerlist').success(function(data) {
         $scope.customers = data.records;  
       });
   }    
@@ -55,13 +55,13 @@ app.controller('CustomerEditControler',[
       var id = $routeParams.id;
       $scope.activePath = null;
       //Pobieramy szczegółowe dane Klienta do $scope.CustomerDetail
-      $http.get('api/index.php/Customerlist/'+id).success(function(data) {
-        $scope.CustomerDetail = data;
+      $http.get('api/index.php/customeredit/'+id).success(function(data) {
+        $scope.CustomerDetail = data.records;
       });
 
       //Uaktualnienie Klienta
       $scope.Update_Customer = function(customer) {
-          $http.put('api/Customers/'+id, customer).success(function(data) {
+          $http.put('api/index.php/customerupdate/'+id, customer).success(function(data) {
           $scope.CustomerDetail = data;
           $scope.activePath = $location.path('/');
         });

@@ -5,15 +5,15 @@
   <form novalidate ng-repeat="customer in CustomerDetail" name="AddNewForm" id="add-new-form" method="post" action="">
     <input type="hidden" ng-model="customer.id" value="{{customer.id}}" />
      <div class="form-group">
-      <label>Nazwa</label>
+      <label>Username</label>
       <input class="form-control" type="text" ng-model="customer.Username" value="{{customer.Username}}" required />
     </div>
     <div class="form-group">
-      <label>Adres</label>
+      <label>First Name</label>
       <input class="form-control" type="text" ng-model="customer.First_Name" value="{{customer.First_Name}}" required />
     </div>
      <div class="form-group">
-      <label>Telefon</label>
+      <label>Last Name</label>
       <input class="form-control" type="text" ng-model="customer.Last_Name" value="{{customer.Last_Name}}" required />
     </div>
     <div class="form-group">
@@ -21,7 +21,7 @@
       <input class="form-control" type="text" ng-model="customer.Email" value="{{customer.Email}}" required />
     </div>
     <div class="form-group">
-      <label>Notatka</label>
+      <label>Status</label>
       <input class="form-control" type="text" ng-model="customer.Status" value="{{customer.Status}}" required />
     </div>
 

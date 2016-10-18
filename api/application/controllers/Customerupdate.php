@@ -1,10 +1,10 @@
 <?php
 header('Access-Control-Allow-Headers: Content-Type');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS');
 header('Access-Control-Allow-Origin: *');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Customeredit extends CI_Controller {
+class Customerupdate extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -32,7 +32,7 @@ class Customeredit extends CI_Controller {
 	public function index($id)
 	{
 		
-		$this->Crud_model->customerEditModel($id);
+		$this->Crud_model->update($id);
 		
 		
 		
