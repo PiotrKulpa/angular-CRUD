@@ -17,10 +17,16 @@ app.controller ('CustomerListControler',[
   '$scope','$http',
   function ($scope, $http) 
   {
-      $http.get('api/index.php/customerlist').success(function(data) 
-	  {
-		$scope.customers = data.records;  
-      });
+		$http({
+		method: 'GET',
+		url: 'api/index.php/customerlist'
+		}).then(function successCallback(response) {
+		$scope.customers = response.data.records; 
+		}, function errorCallback(response) {
+		// called asynchronously if an error occurs
+		// or server returns response with an error status.
+		});
+		
   }    
 ]),
 app.controller ('CustomerAddControler',[
@@ -30,19 +36,50 @@ app.controller ('CustomerAddControler',[
       $scope.activePath = null;
       $scope.New_Customer = function(customer, AddNewForm) 
 	  {
-			console.log(customer);
 			
+			$http({
+				  method: 'POST',
+				  url: 'api/index.php',
+				  data: customer,
+				  headers: {'Content-Type': 'application/json'}
+			}).then(function successCallback(response) {
+				// this callback will be called asynchronously
+				// when the response is available
+				$window.location = "/testphp/angularcrud";
+				$scope.reset();
+				$scope.msg = '';
+			}, function errorCallback(response) {
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+				$scope.msg = 'Failed! Try again!';
+				$scope.msgcss = 'alert alert-danger';
+			});
+			  
+			$scope.reset = function() {
+				$scope.customer = angular.copy($scope.master);
+			};
+
+			console.log(customer);
+			$scope.reset();
+			
+			/*
+			deprecieted method > 1.4 v
 			$http.post('api/index.php', customer).success(function(){
 				$window.location = "/testphp/angularcrud";
-				$scope.reset();	
+				$scope.reset();
+				$scope.msg = 'Succes! Customer added to database';
 			});
 			
 			$scope.reset = function() {
-              
+		  
 				$scope.customer = angular.copy($scope.master);
-			  
+		  
 			};
-          $scope.reset();
+			$scope.reset();
+			$scope.msg = 'Failed! Try again!';
+			$scope.msgcss = 'alert alert-danger';
+			*/
+			
       };
 
   }
