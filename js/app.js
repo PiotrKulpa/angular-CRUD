@@ -21,10 +21,11 @@ app.controller ('CustomerListControler',[
 		method: 'GET',
 		url: 'api/index.php/customerlist'
 		}).then(function successCallback(response) {
-		$scope.customers = response.data.records; 
+		$scope.customers = response.data.records;
+		$scope.msg = '';
 		}, function errorCallback(response) {
-		// called asynchronously if an error occurs
-		// or server returns response with an error status.
+		$scope.msg = 'Problem with server! Try again later!';
+		$scope.msgcss = 'alert alert-danger';
 		});
 		
   }    
@@ -43,15 +44,11 @@ app.controller ('CustomerAddControler',[
 				  data: customer,
 				  headers: {'Content-Type': 'application/json'}
 			}).then(function successCallback(response) {
-				// this callback will be called asynchronously
-				// when the response is available
 				$window.location = "/testphp/angularcrud";
 				$scope.reset();
 				$scope.msg = '';
 			}, function errorCallback(response) {
-				// called asynchronously if an error occurs
-				// or server returns response with an error status.
-				$scope.msg = 'Failed! Try again!';
+				$scope.msg = 'Something went wrong when adding! Try again!';
 				$scope.msgcss = 'alert alert-danger';
 			});
 			  
@@ -96,18 +93,43 @@ app.controller('CustomerEditControler',[
   {
 
       //Pobieramy id Klienta
+	  //metoda dolaczona do ngRoute
       var id = $routeParams.id;
       $scope.activePath = null;
 	  
+	  
       //Pobieramy szczegółowe dane Klienta do $scope.CustomerDetail
-      $http.get('api/index.php/customeredit/'+id).success(function(data) 
-	  {
-			$scope.CustomerDetail = data.records;
-      });
+	  $http({
+		method: 'GET',
+		url: 'api/index.php/customeredit/'+id,
+		}).then(function successCallback(response) {
+		$scope.CustomerDetail = response.data.records;
+		$scope.msg = '';
+		}, function errorCallback(response) {
+		$scope.msg = 'Problem with server! Try again later!';
+		$scope.msgcss = 'alert alert-danger';
+		});
+	  
 
       //Uaktualnienie Klienta
       $scope.Update_Customer = function(customer) 
 	  {
+			
+			$http({
+				  method: 'PUT',
+				  url: 'api/index.php/customerupdate/'+id,
+				  data: customer,
+				  headers: {'Content-Type': 'application/json'}
+			}).then(function successCallback(response) {
+				$scope.CustomerDetail = response.data;
+				$scope.activePath = $location.path('/');
+			}, function errorCallback(response) {
+				$scope.msg = 'Something went wrong when adding! Try again!';
+				$scope.msgcss = 'alert alert-danger';
+			});
+			
+			
+			/*
 			$http.put('api/index.php/customerupdate/'+id, customer).success(function(data) 
 			{
 				$scope.CustomerDetail = data;
@@ -115,7 +137,7 @@ app.controller('CustomerEditControler',[
 				//$location zwraca bieżący adres url
 				//$routeParams zwraca parametry url
 			});
-
+			*/
       };
 
       //Kasowanie
