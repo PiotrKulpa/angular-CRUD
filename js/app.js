@@ -1,4 +1,4 @@
-var app = angular.module('Application', ['ngRoute']);
+var app = angular.module('Application', ['ngRoute', 'ngSanitize']);
 
 //Prosta kontrola ścieżek
 app.config(['$routeProvider', function($routeProvider) 
@@ -31,13 +31,21 @@ app.controller ('CustomerListControler',[
   }    
 ]),
 app.controller ('CustomerAddControler',[
-  '$scope','$http','$location', '$window', function ($scope, $http, $location, $window) 
+  '$scope','$http','$location', '$window', '$sanitize', function ($scope, $http, $location, $window, $sanitize) 
   {
       $scope.master = {};
       $scope.activePath = null;
+
+
       $scope.New_Customer = function(customer, AddNewForm) 
 	  {
-			
+			//sanitize function before POST data
+			$scope.customer.Username = $sanitize($scope.customer.Username);
+			$scope.customer.First_Name = $sanitize($scope.customer.First_Name);
+			$scope.customer.Last_Name = $sanitize($scope.customer.Last_Name);
+			$scope.customer.Status = $sanitize($scope.customer.Status);
+
+			//POST
 			$http({
 				  method: 'POST',
 				  url: 'api/index.php',

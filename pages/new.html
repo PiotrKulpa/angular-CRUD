@@ -22,14 +22,14 @@
 
 	  <div class="form-group">
 	  	<label for="email">Email</label>
-	  	<input class="form-control" type="text" ng-model="customer.Email" required />
+	  	<input class="form-control" type="email" name="email" ng-model="customer.Email" required />
 	  </div>
 	  <div class="form-group">
 	  	<label for="country">Status</label>
 	  	<input class="form-control" type="text" ng-model="customer.Status" required />
 	  </div>
 	  
-	  <button class="btn btn-primary" ng-disabled="AddNewForm.$invalid || isUnchanged(customer)" id="add-new-btn" ng-click="New_Customer(customer)">Save</button>
+	  <button class="btn btn-primary" ng-disabled="AddNewForm.$invalid || isUnchanged(customer) || AddNewForm.email.$invalid" id="add-new-btn" ng-click="New_Customer(customer)">Save</button>
 	  <a href="#/" class="btn btn-danger">Cancel</a>
 	</form>
 	</br>
